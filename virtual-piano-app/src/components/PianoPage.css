@@ -1,0 +1,1007 @@
+.piano-page {
+  min-height: 100vh;
+  background: #000;
+  padding: 2rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.piano-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  color: white;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid rgba(20, 184, 166, 0.3);
+}
+
+.back-button {
+  color: white;
+  text-decoration: none;
+  font-size: 1.1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
+  background: rgba(20, 184, 166, 0.15);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(20, 184, 166, 0.3);
+  transition: all 0.3s ease;
+}
+
+.back-button:hover {
+  background: rgba(20, 184, 166, 0.25);
+  color: white;
+  text-decoration: none;
+}
+
+.header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: linear-gradient(45deg, #fff, #14b8a6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.control-group label {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.instrument-selector {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.instrument-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 25px;
+  background: rgba(20, 184, 166, 0.15);
+  color: white;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(20, 184, 166, 0.3);
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.instrument-btn.active {
+  background: linear-gradient(45deg, #14b8a6, #0d9488);
+  box-shadow: 0 4px 15px rgba(20, 184, 166, 0.6);
+}
+
+.instrument-btn:hover {
+  background: rgba(20, 184, 166, 0.25);
+}
+
+.instrument-btn.active:hover {
+  background: linear-gradient(45deg, #14b8a6, #0d9488);
+}
+
+.instrument-icon {
+  font-size: 1.2rem;
+}
+
+.octave-controls {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.octave-btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 25px;
+  background: rgba(20, 184, 166, 0.15);
+  color: white;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(20, 184, 166, 0.3);
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.octave-btn:hover {
+  background: rgba(20, 184, 166, 0.25);
+}
+
+.piano {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto 3rem;
+  background: 
+    linear-gradient(145deg, #14b8a6, #3accac),
+    linear-gradient(45deg, rgba(255, 255, 255, 0.1) 0%, transparent 50%, rgba(0, 0, 0, 0.1) 100%),
+    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 70% 70%, rgba(0, 0, 0, 0.1) 0%, transparent 50%);
+  background-blend-mode: overlay, soft-light, soft-light, soft-light;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 
+    0 20px 40px rgba(20, 184, 166, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.piano::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.1) 50%, transparent 100%);
+  pointer-events: none;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%, 100% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(100%);
+  }
+}
+
+.white-keys {
+  display: flex;
+  position: relative;
+  z-index: 1;
+}
+
+.white-key {
+  flex: 1;
+  height: 200px;
+  background: linear-gradient(145deg, #ffffff, #f0fdfa);
+  border: 1px solid #ccfbf1;
+  border-radius: 0 0 10px 10px;
+  margin: 0 1px;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  padding-bottom: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.1s ease;
+}
+
+.white-key:hover {
+  background: linear-gradient(145deg, #f0fdfa, #ccfbf1);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.white-key.pressed {
+  background: linear-gradient(145deg, #ccfbf1, #99f6e4);
+  transform: translateY(2px);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.black-keys {
+  position: absolute;
+  top: 32px;
+  left: 32px;
+  width: 736px;
+  right: 0;
+  z-index: 2;
+}
+
+.black-key {
+  position: absolute;
+  width: 6%;
+  height: 120px;
+  background: linear-gradient(145deg, #0d9488, #14b8a6);
+  border: 1px solid #0f766e;
+  border-radius: 0 0 8px 8px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  padding-bottom: 0.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: all 0.1s ease;
+}
+
+.black-key:hover {
+  background: linear-gradient(145deg, #14b8a6, #0d9488);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+.black-key.pressed {
+  background: linear-gradient(145deg, #0f766e, #0d9488);
+  transform: translateY(2px);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.key-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #14b8a6;
+  margin-bottom: 0.25rem;
+}
+
+.black-key .key-label {
+  color: #ccfbf1;
+}
+
+.note-label {
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.1);
+  color: #333;
+}
+
+.note-label.played {
+  background: rgba(20, 184, 166, 0.2);
+  color: #fff;
+  font-weight: 700;
+}
+
+.note-label.unplayed {
+  opacity: 0.4;
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.note-label:hover {
+  background: rgba(20, 184, 166, 0.3);
+  color: #fff;
+  opacity: 1;
+}
+
+.instructions {
+  background: rgba(20, 184, 166, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 2rem;
+  border: 1px solid rgba(20, 184, 166, 0.3);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.instructions h3 {
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+  color: #fff;
+}
+
+.instructions ul {
+  list-style: none;
+  padding: 0;
+}
+
+.instructions li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(20, 184, 166, 0.2);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.instructions li:last-child {
+  border-bottom: none;
+}
+
+.instructions li::before {
+  content: "🎵 ";
+  margin-right: 0.5rem;
+}
+
+.metronome-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.metronome-btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 25px;
+  background: rgba(20, 184, 166, 0.15);
+  color: white;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(20, 184, 166, 0.3);
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  min-width: 100px;
+}
+
+.metronome-btn.active {
+  background: linear-gradient(45deg, #14b8a6, #0d9488);
+  box-shadow: 0 4px 15px rgba(20, 184, 166, 0.6);
+}
+
+.metronome-btn:hover {
+  background: rgba(20, 184, 166, 0.25);
+}
+
+.metronome-btn.active:hover {
+  background: linear-gradient(45deg, #14b8a6, #0d9488);
+}
+
+.tempo-control {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.tempo-control label {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.tempo-slider {
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(20, 184, 166, 0.2);
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.tempo-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #14b8a6, #0d9488);
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.tempo-slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #14b8a6, #0d9488);
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.beat-indicator {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+.beat-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transition: all 0.1s ease;
+}
+
+.beat-dot.active {
+  background: #14b8a6;
+  box-shadow: 0 0 10px rgba(20, 184, 166, 0.6);
+}
+
+.recording-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.recording-btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 25px;
+  background: rgba(239, 68, 68, 0.15);
+  color: white;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  min-width: 140px;
+}
+
+.recording-btn.active {
+  background: linear-gradient(45deg, #ef4444, #dc2626);
+  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.6);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.6);
+  }
+  50% {
+    box-shadow: 0 4px 20px rgba(239, 68, 68, 0.8);
+  }
+}
+
+.recording-btn:hover {
+  background: rgba(239, 68, 68, 0.25);
+}
+
+.recording-btn.active:hover {
+  background: linear-gradient(45deg, #ef4444, #dc2626);
+}
+
+.recording-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.clear-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 15px;
+  background: rgba(239, 68, 68, 0.2);
+  color: white;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  transition: all 0.3s ease;
+  font-size: 0.8rem;
+}
+
+.clear-btn:hover {
+  background: rgba(239, 68, 68, 0.3);
+}
+
+.recording-visualization {
+  background: rgba(20, 184, 166, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 2rem;
+  border: 1px solid rgba(20, 184, 166, 0.3);
+  margin-bottom: 2rem;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  overflow-x: auto;
+}
+
+.recording-visualization h3 {
+  margin-bottom: 1.5rem;
+  font-size: 1.3rem;
+  color: #fff;
+  text-align: center;
+}
+
+.piano-roll-container {
+  margin-bottom: 1.5rem;
+}
+
+.piano-roll-header {
+  margin-bottom: 0.5rem;
+}
+
+.time-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-left: 80px; /* Space for note labels */
+}
+
+.piano-roll {
+  display: flex;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  border: 1px solid rgba(20, 184, 166, 0.3);
+  overflow: hidden;
+  min-height: 300px;
+}
+
+.note-labels {
+  width: 80px;
+  background: rgba(0, 0, 0, 0.4);
+  border-right: 1px solid rgba(20, 184, 166, 0.3);
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.note-label {
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.1);
+  color: #333;
+}
+
+.note-label.played {
+  background: rgba(20, 184, 166, 0.2);
+  color: #fff;
+  font-weight: 700;
+}
+
+.note-label.unplayed {
+  opacity: 0.4;
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.note-label:hover {
+  background: rgba(20, 184, 166, 0.3);
+  color: #fff;
+  opacity: 1;
+}
+
+.note-grid {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  min-height: 300px;
+}
+
+.note-row {
+  height: 30px;
+  position: relative;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
+}
+
+.note-row:last-child {
+  border-bottom: none;
+}
+
+.note-block {
+  position: absolute;
+  height: 20px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  top: 5px; /* Center vertically in the 30px row */
+}
+
+.note-block:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  z-index: 10;
+}
+
+/* Grid lines for better visualization */
+.note-grid::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 20px 100%;
+  pointer-events: none;
+}
+
+.recording-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.stat {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.stat-value {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #14b8a6;
+}
+
+.legend {
+  border-top: 1px solid rgba(20, 184, 166, 0.3);
+  padding-top: 1rem;
+}
+
+.legend h4 {
+  margin-bottom: 0.75rem;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.legend-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.legend-color {
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .recording-visualization {
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .note-labels {
+    width: 60px;
+  }
+  
+  .time-labels {
+    margin-left: 60px;
+    font-size: 0.8rem;
+  }
+  
+  .note-label {
+    font-size: 0.7rem;
+    height: 25px;
+  }
+  
+  .note-block {
+    height: 15px;
+    top: 5px;
+  }
+  
+  .recording-stats {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+  
+  .legend-items {
+    justify-content: center;
+  }
+}
+
+/* Animation for new notes appearing */
+@keyframes noteAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.8) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.note-block {
+  animation: noteAppear 0.3s ease-out;
+}
+
+/* Scrollbar styling for horizontal scroll */
+.recording-visualization::-webkit-scrollbar {
+  height: 8px;
+}
+
+.recording-visualization::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.recording-visualization::-webkit-scrollbar-thumb {
+  background: rgba(20, 184, 166, 0.5);
+  border-radius: 4px;
+}
+
+.recording-visualization::-webkit-scrollbar-thumb:hover {
+  background: rgba(20, 184, 166, 0.7);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .piano-page {
+    padding: 1rem;
+  }
+  
+  .header {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+  
+  .header h1 {
+    font-size: 2rem;
+  }
+  
+  .controls {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .instrument-selector {
+    justify-content: center;
+  }
+  
+  .octave-controls {
+    justify-content: center;
+  }
+  
+  .piano {
+    padding: 1rem;
+  }
+  
+  .white-key {
+    height: 150px;
+  }
+  
+  .black-key {
+    height: 90px;
+  }
+  
+  .metronome-controls {
+    align-items: center;
+  }
+  
+  .tempo-control {
+    width: 200px;
+  }
+  
+  .recording-controls {
+    align-items: center;
+  }
+  
+  .recording-info {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .timeline {
+    height: 50px;
+  }
+  
+  .note-label {
+    font-size: 0.6rem;
+  }
+  
+  .recording-stats {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+  
+  .legend-items {
+    justify-content: center;
+  }
+  
+  .timeline-header {
+    font-size: 0.8rem;
+  }
+}
+
+/* Animation for new notes appearing */
+@keyframes noteAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.8) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.timeline-note {
+  animation: noteAppear 0.3s ease-out;
+}
+
+.playback-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  align-items: center;
+}
+
+.playback-buttons {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.playback-btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 25px;
+  color: white;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  min-width: 100px;
+}
+
+.play-btn {
+  background: rgba(34, 197, 94, 0.15);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.play-btn:hover:not(:disabled) {
+  background: rgba(34, 197, 94, 0.25);
+}
+
+.pause-btn {
+  background: linear-gradient(45deg, #f59e0b, #d97706);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.6);
+}
+
+.pause-btn:hover {
+  background: linear-gradient(45deg, #f59e0b, #d97706);
+}
+
+.stop-btn {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.stop-btn:hover:not(:disabled) {
+  background: rgba(239, 68, 68, 0.25);
+}
+
+.restart-btn {
+  background: rgba(59, 130, 246, 0.15);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.restart-btn:hover:not(:disabled) {
+  background: rgba(59, 130, 246, 0.25);
+}
+
+.playback-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.playback-progress {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 400px;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #22c55e, #16a34a);
+  border-radius: 4px;
+  transition: width 0.1s ease;
+}
+
+.progress-time {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+}
+
+/* Playback indicator bar */
+.playback-indicator {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, #ef4444, #dc2626);
+  box-shadow: 0 0 8px rgba(239, 68, 68, 0.8);
+  z-index: 10;
+  pointer-events: none;
+}
+
+.playback-indicator::before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: -3px;
+  width: 8px;
+  height: 8px;
+  background: #ef4444;
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(239, 68, 68, 0.8);
+}
+
+/* Update note-grid to handle the indicator */
+.note-grid {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  min-height: 300px;
+}
+
+/* Responsive design updates */
+@media (max-width: 768px) {
+  .playback-controls {
+    align-items: center;
+  }
+  
+  .playback-buttons {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .playback-btn {
+    min-width: 80px;
+    font-size: 0.8rem;
+    padding: 0.6rem 1rem;
+  }
+  
+  .playback-progress {
+    max-width: 300px;
+  }
+} 

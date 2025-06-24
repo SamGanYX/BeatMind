@@ -1,0 +1,138 @@
+.landing-page {
+  min-height: 100vh;
+  background: #000;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.background-animation {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.floating-circle {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: rgba(20, 184, 166, 0.1);
+  border-radius: 50%;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(20, 184, 166, 0.2);
+}
+
+.content {
+  text-align: center;
+  color: white;
+  z-index: 10;
+  max-width: 1200px;
+  padding: 2rem;
+}
+
+.title {
+  font-size: 4rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  background: linear-gradient(45deg, #fff, #14b8a6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 4px 8px rgba(0,0,0,0.5);
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  margin-bottom: 3rem;
+  opacity: 0.9;
+  font-weight: 300;
+}
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.feature {
+  background: rgba(20, 184, 166, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 2rem;
+  border: 1px solid rgba(20, 184, 166, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(20, 184, 166, 0.3);
+  background: rgba(20, 184, 166, 0.25);
+}
+
+.feature-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.feature h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.feature p {
+  opacity: 0.8;
+  line-height: 1.6;
+}
+
+.cta-section {
+  margin-top: 2rem;
+}
+
+.cta-button {
+  background: linear-gradient(45deg, #14b8a6, #0d9488);
+  color: white;
+  border: none;
+  padding: 1rem 3rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  box-shadow: 0 8px 25px rgba(20, 184, 166, 0.6);
+  transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+  text-decoration: none;
+  color: white;
+  box-shadow: 0 12px 35px rgba(20, 184, 166, 0.8);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 2.5rem;
+  }
+  
+  .subtitle {
+    font-size: 1.2rem;
+  }
+  
+  .features {
+    grid-template-columns: 1fr;
+  }
+  
+  .content {
+    padding: 1rem;
+  }
+} 
